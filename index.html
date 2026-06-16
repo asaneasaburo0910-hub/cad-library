@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAD Symbol Library</title>
+
+<style>
+body{
+    font-family:sans-serif;
+    margin:20px;
+}
+
+h1{
+    border-bottom:2px solid #ccc;
+    padding-bottom:10px;
+}
+
+.symbol{
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:10px;
+    margin:10px;
+    width:180px;
+    display:inline-block;
+    text-align:center;
+}
+
+.symbol img{
+    width:80px;
+    height:80px;
+}
+
+.category{
+    color:#666;
+    font-size:12px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>CAD Symbol Library</h1>
+
+<div id="symbols">
+読み込み中...
+</div>
+
+<script>
+fetch('./symbols.json')
+.then(res => res.json())
+.then(data => {
+
+    const container = document.getElementById('symbols');
+    container.innerHTML = '';
+
+    data.forEach(symbol => {
+
+        const div = document.createElement('div');
+        div.className = 'symbol';
+
+        div.innerHTML = `
+            <img src="${symbol.file}">
+            <h3>${symbol.name}</h3>
+            <div class="category">${symbol.category}</div>
+            <a href="${symbol.file}" target="_blank">
+                SVGを開く
+            </a>
+        `;
+
+        container.appendChild(div);
+    });
+
+})
+.catch(err=>{
+    document.getElementById('symbols').innerHTML =
+        'symbols.json の読み込みに失敗しました';
+    console.error(err);
+});
+</script>
+
+</body>
+</html>
