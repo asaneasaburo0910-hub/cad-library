@@ -1,0 +1,14 @@
+[
+  {
+    "id": "outlet",
+    "name": "コンセント",
+    "category": "electrical",
+    "file": "electrical/outlet.svg"
+  },
+  {
+    "id": "lan",
+    "name": "LAN",
+    "category": "telecom",
+    "file": "telecom/lan.svg"
+  }
+]
